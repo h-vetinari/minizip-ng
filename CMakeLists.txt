@@ -59,6 +59,9 @@ endif()
 
 # create minizip library
 add_library(minizip ${MINIZIP_SRC} ${MINIZIP_PUBLIC_HEADERS})
+if(WIN32 AND (NOT BUILD_SHARED_LIBS))
+  set_target_properties(minizip PROPERTIES SUFFIX "_static.lib")
+endif()
 target_link_libraries(minizip ZLIB::ZLIB)
 
 option(USE_AES "enables building of aes library" ON)
